@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import New from './New';
 import Wrapper from './Wrapper';
+import './Jairo.css';
 
 class Jairo extends Component {
 
@@ -17,7 +18,7 @@ class Jairo extends Component {
 
     return (
       <Wrapper title="COGNOX" footer={<div>FOOTER</div>} >
-        <div>
+        <div className="demo red">
           Hola {info}
         </div>
       </Wrapper>
