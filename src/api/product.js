@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 class Product {
-  async getProducts() {
-    return await axios.get(
+  getProducts() {
+    return axios.get(
       'products.json',
     );
   }

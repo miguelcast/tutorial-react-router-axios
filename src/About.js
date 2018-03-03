@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import Product from './api/product';
+import { getProducts } from './state/product/actions';
 
 const Img = styled.img`
   width: 200px;
@@ -32,20 +33,9 @@ class About extends Component {
     products: [],
   }
 
-  constructor(props) {
-    super(props);
-    this.objProduct = new Product();
-  }
-
-  async componentDidMount() {
-    try {
-      const response = await this.objProduct.getProducts();
-      this.setState({
-        products: response.data,
-      });
-    } catch (err) {
-      console.log(err);
-    }
+  componentDidMount() {
+    console.log(this.props);
+    this.props.getProducts();
   }
 
   render() {
@@ -69,4 +59,4 @@ class About extends Component {
   }
 }
 
-export default About;
+export default connect(null, { getProducts })(About);
