@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { getProducts } from './state/product/actions';
+import productReducer from "./state/product/reducer";
 
 const Img = styled.img`
   width: 200px;
@@ -29,10 +30,6 @@ const Price = styled(Title)`
 class About extends Component {
   objProduct = null;
 
-  state = {
-    products: [],
-  }
-
   componentDidMount() {
     console.log(this.props);
     this.props.getProducts();
@@ -42,9 +39,9 @@ class About extends Component {
     return (
       <div>
         <Title color="blue">About</Title>
-        Vamos a <Link to="/">Jairo</Link>
+        Vamos a <Link to="/count">Counter</Link>
         {
-          this.state.products.map(item => (
+          this.props.products.map(item => (
             <ContentProduct key={item.id}>
               <div>
                 <Title>{item.name}</Title>
@@ -59,4 +56,16 @@ class About extends Component {
   }
 }
 
-export default connect(null, { getProducts })(About);
+const mapStateToProps = state => {
+  return {
+    products: state.productReducer.products,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getProducts: () => dispatch(getProducts(dispatch)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(About);

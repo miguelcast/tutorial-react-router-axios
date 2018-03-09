@@ -2,10 +2,13 @@ import Product from '../../api/product';
 
 this.objProduct = new Product();
 
-const getProducts = () => {
+const getProducts = dispatch => {
   this.objProduct.getProducts()
     .then(response => {
-      console.log(response.data);
+      dispatch({
+        type: 'GET_PRODUCTS_SUCCESS',
+        data: response.data,
+      });
     })
     .catch();
 
