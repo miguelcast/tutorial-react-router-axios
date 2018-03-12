@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Button, Card, Row, Col } from 'antd';
 
-import { getProducts } from './state/product/actions';
-import productReducer from "./state/product/reducer";
+import { getProducts } from '../../state/product/actions';
 
 const Img = styled.img`
   width: 200px;
@@ -27,7 +27,7 @@ const Price = styled(Title)`
   color: red;
 `;
 
-class About extends Component {
+class Product extends Component {
   objProduct = null;
 
   componentDidMount() {
@@ -39,18 +39,24 @@ class About extends Component {
     return (
       <div>
         <Title color="blue">About</Title>
-        Vamos a <Link to="/count">Counter</Link>
+        Vamos a
+        <Link to="/count">
+          <Button type="primary" icon="arrow-right">Counter</Button>
+        </Link>
+        <Row gutter={12}>
         {
           this.props.products.map(item => (
-            <ContentProduct key={item.id}>
-              <div>
-                <Title>{item.name}</Title>
-                <Price color="yellow">{item.price}</Price>
-              </div>
-              <Img src={item.image} alt="imagen"/>
-            </ContentProduct>
+            <Col key={item.id} span={8} >
+              <Card title={item.name}>
+                <div>
+                  <Price color="yellow">{item.price}</Price>
+                </div>
+                <Img src={item.image} alt="imagen"/>
+              </Card>
+            </Col>
           ))
         }
+        </Row>
       </div>
     );
   }
@@ -62,10 +68,8 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getProducts: () => dispatch(getProducts(dispatch)),
-  };
+const mapDispatchToPros = {
+  getProducts,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(About);
+export default connect(mapStateToProps, mapDispatchToPros)(Product);

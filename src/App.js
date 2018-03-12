@@ -5,12 +5,12 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import Jairo from './Jairo';
-import About from './About';
-import CounterProducts from './CounterProducts';
-import Error404 from './Error404';
+import Jairo from './components/Jairo/Jairo';
+import Product from './components/Product/Product';
+import CounterProducts from './components/Product/CounterProducts';
+import Error404 from './components/Error/Error404';
 import store from './state/store';
-
+import 'antd/dist/antd.min.css';
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={Jairo} />
-          <Route path="/about" component={About} />
+          <Route path="/products" component={Product} />
           <Route path="/count" component={CounterProducts} />
           <Route component={Error404} />
         </Switch>
